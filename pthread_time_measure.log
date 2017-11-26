@@ -1,3 +1,0 @@
-srun -p batch -N 1 -n 1 -c 1 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 1
-srun: job 205991 queued and waiting for resources
-srun: job 205991 queued and waiting for resources
