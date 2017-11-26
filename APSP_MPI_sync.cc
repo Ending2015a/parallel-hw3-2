@@ -210,7 +210,6 @@ inline void floyd(){
 inline void dump_to_file(const char *file){
     std::stringstream ss;
     
-    TIC;
     std::ostream_iterator<int> out(ss, " ");
     std::copy(data, data+vert, out);
     ss << '\n';
@@ -222,8 +221,6 @@ inline void dump_to_file(const char *file){
     MPI_File fout;
     MPI_File_delete(file, MPI_INFO_NULL);
     MPI_File_open(MPI_COMM_WORLD, file, MPI_MODE_WRONLY | MPI_MODE_CREATE, MPI_INFO_NULL, &fout);
-
-    TOC_P(IO);
 
     TIC;{
     MPI_Allreduce(MPI_IN_PLACE, len, vert, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
@@ -282,7 +279,7 @@ int main(int argc, char **argv){
     TIME(ED);
     EXE = ED - ST;
     //rank, EXE, CALC, WAIT, IO, COMM, PROC
-    printf("%d, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf\n", world_rank, EXE, CALC, WAIT, IO, COMM, EXE-CALC-WAIT-IO-COMM, B1, B2, B3, B4, B5);
+    printf("%d, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf\n", world_rank, EXE, CALC, WAIT, IO, COMM, EXE-CALC-WAIT-IO-COMM-B3, B1, B2, B3, B4, B5);
 #endif
 
     finalize();
