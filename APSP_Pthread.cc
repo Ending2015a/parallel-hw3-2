@@ -296,7 +296,7 @@ int main(int argc, char **argv){
     avg_waittime /= valid_size;
     
     //EXE, calc, wait, io, others
-    printf("%lf, %lf, %lf, %lf, \n", EXE, avg_calctime, avg_waittime, IO, (EXE-avg_calctime-avg_waittime-IO));
+    printf("%lf, %lf, %lf, %lf, %lf\n", EXE, avg_calctime, avg_waittime, IO, (EXE-avg_calctime-avg_waittime-IO));
 
 
     delete [] total_calctime;
