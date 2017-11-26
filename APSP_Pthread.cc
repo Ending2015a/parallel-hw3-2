@@ -25,7 +25,7 @@
 #define MAX(x, y) ((x)>(y)?(x):(y))
 
 
-#define _MEASURE_TIME
+//#define _MEASURE_TIME
 
 #ifdef _MEASURE_TIME
     struct timespec __temp_time;

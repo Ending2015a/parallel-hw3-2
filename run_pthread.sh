@@ -6,7 +6,7 @@ pc=('1' '2' '4' '8' '12' '12' '12' '12' '12'  '12')
 c=('1'  '2' '4' '8' '12' '16' '32' '64' '128' '2000')
 testcase=("v2k_e2k" "v2k_e200k" "v2k_e1m" "v2k_e2m")
 root="testcase/"
-log="pthread_time_measure.log"
+log="pthread_final_test.log"
 
 
 if [ -f "$log" ] ; then

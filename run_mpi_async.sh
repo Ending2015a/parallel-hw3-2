@@ -6,7 +6,7 @@ pc=('1' '2' '3' '4')
 c=('200' '200' '200' '200')
 testcase=("v200_e200" "v200_e1k" "v200_e10k" "v200_e20k")
 root="testcase/"
-log="mpi_async_time_measure.log"
+log="mpi_async_final_test.log"
 
 
 if [ -f "$log" ] ; then
