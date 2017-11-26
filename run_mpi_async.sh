@@ -3,8 +3,8 @@
 program="APSP_MPI_sync"
 p='-p batch'
 pc=('1' '2' '3' '4')
-c=('800' '800' '800' '800')
-testcase=("v800_e800" "v800_e50k" "v800_e100k" "v800_e300k")
+c=('200' '200' '200' '200')
+testcase=("v200_e200" "v200_e1k" "v200_e10k" "v200_e20k")
 root="testcase/"
 log="mpi_async_time_measure.log"
 
@@ -24,8 +24,8 @@ for ((n=0;n<${#testcase[@]};++n)); do
             echo -e "$oup existed!! -> \e[1;31mremove\e[0m"
             rm ${oup}
         fi
-        echo "srun $p -N ${pc[$i]} -n ${c[$i]} ./${program} $inp $oup ${c[$i]}" | tee -a $log
-        { time srun $p -N ${pc[$i]} -n ${c[$i]} ./${program} $inp $oup ${c[$i]} | tee -a $log ; } | tee -a $log
+        echo "srun --overcommit $p -N ${pc[$i]} -n ${c[$i]} ./${program} $inp $oup ${c[$i]}" |& tee -a $log
+        { time srun --overcommit $p -N ${pc[$i]} -n ${c[$i]} ./${program} $inp $oup ${c[$i]} |& tee -a $log ; } |& tee -a $log
 
         diff $oup $ans
         if [ $? == 0 ] ; then

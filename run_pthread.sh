@@ -24,14 +24,14 @@ for ((n=0;n<${#testcase[@]};++n)); do
             echo -e "$oup existed!! -> \e[1;31mremove\e[0m"
             rm ${oup}
         fi
-        echo "srun $p -N 1 -c ${pc[$i]} ./${program} $inp $oup ${c[$i]}" | tee -a $log
-        { time srun $p -N 1 -c ${pc[$i]} ./${program} $inp $oup ${c[$i]} | tee -a $log ; } | tee -a $log
+        echo "srun $p -N 1 -n 1 -c ${pc[$i]} ./${program} $inp $oup ${c[$i]}" |& tee -a $log
+        { time srun $p -N 1 -n 1 -c ${pc[$i]} ./${program} $inp $oup ${c[$i]} |& tee -a $log ; } |& tee -a $log
 
         diff $oup $ans
         if [ $? == 0 ] ; then
-            echo -e "\e[1;32mCorrect\e[0m"
+            echo -e "\e[1;32mCorrect\e[0m" |& tee -a $log
         else
-            echo -e "\e[1;31mWrong\e[0m"
+            echo -e "\e[1;31mWrong\e[0m" |& tee -a $log
         fi
     done
 done

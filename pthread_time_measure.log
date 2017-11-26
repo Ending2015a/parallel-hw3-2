@@ -1,0 +1,480 @@
+srun -p batch -N 1 -n 1 -c 1 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 1
+12.677979, 12.324646, 0.007773, 0.345561, 
+12.677979, 12.324646, 0.007773, 0.345561, 
+
+real	0m12.788s
+user	0m0.006s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 2 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 2
+6.608740, 6.916039, 0.007702, -0.315001, 
+6.608740, 6.916039, 0.007702, -0.315001, 
+
+real	0m6.720s
+user	0m0.006s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 4 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 4
+3.446459, 3.503480, 0.008042, -0.065063, 
+3.446459, 3.503480, 0.008042, -0.065063, 
+
+real	0m3.554s
+user	0m0.007s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 8 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 8
+2.015466, 1.908953, 0.007791, 0.098722, 
+2.015466, 1.908953, 0.007791, 0.098722, 
+
+real	0m2.131s
+user	0m0.006s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 12
+1.419199, 1.323097, 0.007537, 0.088564, 
+1.419199, 1.323097, 0.007537, 0.088564, 
+
+real	0m1.533s
+user	0m0.004s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 12
+1.448983, 1.354544, 0.007693, 0.086746, 
+1.448983, 1.354544, 0.007693, 0.086746, 
+
+real	0m1.565s
+user	0m0.008s
+sys	0m0.006s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 16
+2.120105, 1.996927, 0.007764, 0.115414, 
+2.120105, 1.996927, 0.007764, 0.115414, 
+
+real	0m2.235s
+user	0m0.009s
+sys	0m0.009s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 32
+2.110019, 1.949943, 0.007858, 0.152218, 
+2.110019, 1.949943, 0.007858, 0.152218, 
+
+real	0m2.223s
+user	0m0.008s
+sys	0m0.008s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 48
+2.034651, 1.879387, 0.008240, 0.147024, 
+2.034651, 1.879387, 0.008240, 0.147024, 
+
+real	0m2.148s
+user	0m0.003s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 64
+2.012933, 1.860569, 0.007799, 0.144565, 
+2.012933, 1.860569, 0.007799, 0.144565, 
+
+real	0m2.131s
+user	0m0.006s
+sys	0m0.007s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 80
+2.127228, 1.979031, 0.007612, 0.140585, 
+2.127228, 1.979031, 0.007612, 0.140585, 
+
+real	0m2.245s
+user	0m0.007s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 96
+2.342351, 2.178285, 0.008912, 0.155154, 
+2.342351, 2.178285, 0.008912, 0.155154, 
+
+real	0m2.461s
+user	0m0.009s
+sys	0m0.007s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 112
+2.574880, 2.430462, 0.007626, 0.136792, 
+2.574880, 2.430462, 0.007626, 0.136792, 
+
+real	0m2.696s
+user	0m0.007s
+sys	0m0.008s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 128
+2.726909, 2.591394, 0.007789, 0.127725, 
+2.726909, 2.591394, 0.007789, 0.127725, 
+
+real	0m2.849s
+user	0m0.007s
+sys	0m0.008s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2k.in v2k_e2k.out 2000
+53.376446, 53.212386, 0.007881, 0.156179, 
+53.376446, 53.212386, 0.007881, 0.156179, 
+
+real	0m53.502s
+user	0m0.007s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 1 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 1
+12.694522, 12.337027, 0.007639, 0.349855, 
+12.694522, 12.337027, 0.007639, 0.349855, 
+
+real	0m12.808s
+user	0m0.006s
+sys	0m0.009s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 2 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 2
+6.621615, 6.388935, 0.008328, 0.224352, 
+6.621615, 6.388935, 0.008328, 0.224352, 
+
+real	0m6.737s
+user	0m0.007s
+sys	0m0.009s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 4 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 4
+3.480902, 4.284276, 0.008585, -0.811959, 
+3.480902, 4.284276, 0.008585, -0.811959, 
+
+real	0m3.582s
+user	0m0.008s
+sys	0m0.008s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 8 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 8
+2.200099, 2.081244, 0.008645, 0.110210, 
+2.200099, 2.081244, 0.008645, 0.110210, 
+
+real	0m2.305s
+user	0m0.006s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 12
+1.492305, 1.361731, 0.009264, 0.121311, 
+1.492305, 1.361731, 0.009264, 0.121311, 
+
+real	0m1.602s
+user	0m0.009s
+sys	0m0.008s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 12
+1.468686, 1.340397, 0.008725, 0.119564, 
+1.468686, 1.340397, 0.008725, 0.119564, 
+
+real	0m1.586s
+user	0m0.009s
+sys	0m0.009s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 16
+2.146258, 1.982083, 0.009460, 0.154714, 
+2.146258, 1.982083, 0.009460, 0.154714, 
+
+real	0m2.263s
+user	0m0.007s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 32
+2.101636, 1.943633, 0.009470, 0.148533, 
+2.101636, 1.943633, 0.009470, 0.148533, 
+
+real	0m2.208s
+user	0m0.005s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 48
+2.072345, 1.910384, 0.009573, 0.152388, 
+2.072345, 1.910384, 0.009573, 0.152388, 
+
+real	0m2.194s
+user	0m0.004s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 64
+2.041646, 1.876212, 0.009364, 0.156070, 
+2.041646, 1.876212, 0.009364, 0.156070, 
+
+real	0m2.164s
+user	0m0.006s
+sys	0m0.009s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 80
+2.142668, 1.980701, 0.009493, 0.152475, 
+2.142668, 1.980701, 0.009493, 0.152475, 
+
+real	0m2.267s
+user	0m0.009s
+sys	0m0.008s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 96
+2.261249, 2.097628, 0.009051, 0.154570, 
+2.261249, 2.097628, 0.009051, 0.154570, 
+
+real	0m2.376s
+user	0m0.006s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 112
+2.593773, 2.437745, 0.009934, 0.146094, 
+2.593773, 2.437745, 0.009934, 0.146094, 
+
+real	0m2.703s
+user	0m0.008s
+sys	0m0.008s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 128
+2.699237, 2.543433, 0.009335, 0.146469, 
+2.699237, 2.543433, 0.009335, 0.146469, 
+
+real	0m2.807s
+user	0m0.004s
+sys	0m0.012s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e200k.in v2k_e200k.out 2000
+58.177292, 57.989150, 0.009851, 0.178292, 
+58.177292, 57.989150, 0.009851, 0.178292, 
+
+real	0m58.297s
+user	0m0.007s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 1 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 1
+12.903202, 12.328165, 0.024437, 0.550600, 
+12.903202, 12.328165, 0.024437, 0.550600, 
+
+real	0m13.024s
+user	0m0.007s
+sys	0m0.009s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 2 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 2
+6.842092, 6.393406, 0.017151, 0.431535, 
+6.842092, 6.393406, 0.017151, 0.431535, 
+
+real	0m6.959s
+user	0m0.006s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 4 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 4
+3.729895, 4.268429, 0.017361, -0.555895, 
+3.729895, 4.268429, 0.017361, -0.555895, 
+
+real	0m3.834s
+user	0m0.008s
+sys	0m0.008s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 8 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 8
+2.477606, 2.955914, 0.018580, -0.496887, 
+2.477606, 2.955914, 0.018580, -0.496887, 
+
+real	0m2.585s
+user	0m0.006s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 12
+1.672260, 1.329441, 0.018097, 0.324722, 
+1.672260, 1.329441, 0.018097, 0.324722, 
+
+real	0m1.781s
+user	0m0.007s
+sys	0m0.009s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 12
+1.748149, 1.401708, 0.017711, 0.328730, 
+1.748149, 1.401708, 0.017711, 0.328730, 
+
+real	0m1.856s
+user	0m0.007s
+sys	0m0.008s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 16
+2.333569, 1.969748, 0.018103, 0.345718, 
+2.333569, 1.969748, 0.018103, 0.345718, 
+
+real	0m2.443s
+user	0m0.003s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 32
+2.333366, 1.961206, 0.018784, 0.353376, 
+2.333366, 1.961206, 0.018784, 0.353376, 
+
+real	0m2.442s
+user	0m0.009s
+sys	0m0.006s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 48
+2.303334, 1.918107, 0.018727, 0.366501, 
+2.303334, 1.918107, 0.018727, 0.366501, 
+
+real	0m2.418s
+user	0m0.005s
+sys	0m0.012s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 64
+2.246306, 1.873400, 0.018694, 0.354211, 
+2.246306, 1.873400, 0.018694, 0.354211, 
+
+real	0m2.361s
+user	0m0.005s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 80
+2.343775, 1.961026, 0.018180, 0.364569, 
+2.343775, 1.961026, 0.018180, 0.364569, 
+
+real	0m2.458s
+user	0m0.008s
+sys	0m0.008s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 96
+2.657760, 2.271174, 0.024030, 0.362557, 
+2.657760, 2.271174, 0.024030, 0.362557, 
+
+real	0m2.778s
+user	0m0.005s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 112
+2.783612, 2.413976, 0.019752, 0.349884, 
+2.783612, 2.413976, 0.019752, 0.349884, 
+
+real	0m2.905s
+user	0m0.009s
+sys	0m0.007s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 128
+2.864870, 2.482022, 0.018855, 0.363994, 
+2.864870, 2.482022, 0.018855, 0.363994, 
+
+real	0m2.979s
+user	0m0.006s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e1m.in v2k_e1m.out 2000
+50.745433, 50.341340, 0.019486, 0.384607, 
+50.745433, 50.341340, 0.019486, 0.384607, 
+
+real	0m50.857s
+user	0m0.009s
+sys	0m0.006s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 1 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 1
+13.140352, 12.300095, 0.026655, 0.813603, 
+13.140352, 12.300095, 0.026655, 0.813603, 
+
+real	0m13.274s
+user	0m0.005s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 2 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 2
+7.128680, 7.012304, 0.028754, 0.087622, 
+7.128680, 7.012304, 0.028754, 0.087622, 
+
+real	0m7.242s
+user	0m0.010s
+sys	0m0.006s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 4 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 4
+3.985024, 4.217890, 0.027354, -0.260220, 
+3.985024, 4.217890, 0.027354, -0.260220, 
+
+real	0m4.112s
+user	0m0.006s
+sys	0m0.010s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 8 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 8
+2.686109, 2.732987, 0.029570, -0.076448, 
+2.686109, 2.732987, 0.029570, -0.076448, 
+
+real	0m2.807s
+user	0m0.008s
+sys	0m0.006s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 12
+1.942063, 1.315439, 0.027911, 0.598713, 
+1.942063, 1.315439, 0.027911, 0.598713, 
+
+real	0m2.061s
+user	0m0.005s
+sys	0m0.012s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 12
+1.935990, 1.320196, 0.028902, 0.586892, 
+1.935990, 1.320196, 0.028902, 0.586892, 
+
+real	0m2.056s
+user	0m0.007s
+sys	0m0.009s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 16
+2.631210, 1.952701, 0.028508, 0.650001, 
+2.631210, 1.952701, 0.028508, 0.650001, 
+
+real	0m2.760s
+user	0m0.004s
+sys	0m0.013s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 32
+2.639017, 1.973264, 0.031139, 0.634614, 
+2.639017, 1.973264, 0.031139, 0.634614, 
+
+real	0m2.767s
+user	0m0.007s
+sys	0m0.009s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 48
+2.655929, 1.997243, 0.032981, 0.625705, 
+2.655929, 1.997243, 0.032981, 0.625705, 
+
+real	0m2.768s
+user	0m0.009s
+sys	0m0.007s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 64
+2.663344, 2.006069, 0.029137, 0.628138, 
+2.663344, 2.006069, 0.029137, 0.628138, 
+
+real	0m2.789s
+user	0m0.008s
+sys	0m0.008s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 80
+2.625201, 1.206688, 0.029279, 1.389235, 
+2.625201, 1.206688, 0.029279, 1.389235, 
+
+real	0m2.748s
+user	0m0.005s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 96
+2.863082, 2.220154, 0.028766, 0.614161, 
+2.863082, 2.220154, 0.028766, 0.614161, 
+
+real	0m2.987s
+user	0m0.008s
+sys	0m0.007s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 112
+3.076340, 2.428728, 0.028933, 0.618680, 
+3.076340, 2.428728, 0.028933, 0.618680, 
+
+real	0m3.203s
+user	0m0.007s
+sys	0m0.009s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 128
+3.245479, 2.606681, 0.029299, 0.609498, 
+3.245479, 2.606681, 0.029299, 0.609498, 
+
+real	0m3.366s
+user	0m0.005s
+sys	0m0.011s
+[1;32mCorrect[0m
+srun -p batch -N 1 -n 1 -c 12 ./APSP_Pthread testcase/v2k_e2m.in v2k_e2m.out 2000
+74.391026, 73.690288, 0.028826, 0.671911, 
+74.391026, 73.690288, 0.028826, 0.671911, 
+
+real	1m14.510s
+user	0m0.008s
+sys	0m0.006s
+[1;32mCorrect[0m

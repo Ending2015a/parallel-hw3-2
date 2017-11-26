@@ -198,7 +198,7 @@ void *task(void* var){
     parallel_dump_to_file(id);
 #endif
 
-    return NULL;    
+    pthread_exit(NULL);
 }
 
 int main(int argc, char **argv){
@@ -209,12 +209,13 @@ int main(int argc, char **argv){
     TIME(ST);
 
     num_threads = atoi(argv[3]);
-    threads = new pthread_t[num_threads];
-    ID = new int[num_threads];
 
     dump_from_file(argv[1]);
 
     valid_size = (vert < num_threads) ? vert:num_threads;
+
+    threads = new pthread_t[valid_size];
+    ID = new int[valid_size];
 
 #ifdef _MEASURE_TIME
     total_calctime_st = new double[valid_size]{};
@@ -260,10 +261,8 @@ int main(int argc, char **argv){
 #ifdef _MEASURE_TIME   
     EXE = ED - ST;
     //ID, EXE, calc, io, others
-    for(int i=0;i<valid_size;++i){
-        printf("%d, %lf, %lf, %lf, %lf, \n", i, EXE, total_calctime_ed[i]-total_calctime_st[i], 
-                            IO, (EXE-(total_calctime_ed[i]-total_calctime_st[i])-IO));
-    }
+    printf("%lf, %lf, %lf, %lf, \n", EXE, total_calctime_ed[0]-total_calctime_st[0], 
+                            IO, (EXE-(total_calctime_ed[0]-total_calctime_st[0])-IO));
 
 
     delete [] total_calctime_st;

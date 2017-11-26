@@ -3,9 +3,11 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
+#include <iterator>
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <string.h>
 #include <assert.h>
 #include <mpi.h>
@@ -86,60 +88,45 @@ int edge;
 MPI_Comm COMM_GRAPH;
 
 
-struct Map{
-    int *data;
-    std::vector<int> neig;
-    int vt;
-    int nb;
-    Map(){}
-    ~Map(){
-        delete [] data;
-    }
+int *data;
+int *buf;
+std::vector<int> neig;
+int neig_count;
 
-    inline void init(int v){
-        vt = v;
-        data = new int[v];
-        std::fill(data, data+v, INF);
-        data[world_rank]=0;
-        neig.reserve(vt);
-    }
 
-    inline void calc(){
-        for(int i=0;i<vt; ++i){
-            if(i != world_rank && data[i] != INF)
-                neig.push_back(i);
+inline void init(){
+    data = new int[vert];
+    buf = new int[vert];
+    std::fill(data, data+vert, INF);
+    data[world_rank] = 0;
+    neig.reserve(vert);
+}
+
+inline void finalize(){
+    delete [] data;
+    delete [] buf;    
+}
+
+inline void calc(){
+    for(int i=0;i<vert;++i){
+        if( i != world_rank && data[i] != INF){
+            neig.push_back(i);
         }
+    }
 
-        nb = neig.size();
+    neig_count = neig.size();
+}
 
-#ifdef X_DEBUG_
-        std::stringstream ss;
-        for(int i=0;i<nb;++i){
-            ss << neig[i] << ", ";
+inline int update(int id){
+    int up = 0;
+    for(int i=0;i<vert;++i){
+        if(data[i] > data[id] + buf[i]){
+            data[i] = data[id] + buf[i];
+            up = 1;
         }
-        LOG("neig: %s", ss.str().c_str());
-#endif
     }
-
-    inline int update(int id, int *buf){
-        int up = 0;
-        for(int i=0;i<vt;++i){
-            if(data[i] > data[id] + buf[i]){
-                data[i] = data[id] + buf[i];
-                up = 1;
-            }
-        }
-        return up;
-    }
-
-    inline int &operator[](const int &index){
-        return data[index];
-    }
-};
-
-Map map;
-
-int done=0;
+    return up;
+}
 
 inline void dump_from_file(const char *file){
 
@@ -153,45 +140,42 @@ inline void dump_from_file(const char *file){
 
     ss >> vert >> edge;
 
-    map.init(vert);
+    init();
 
     int i, j, w;
     for(int e=0;e<edge;++e){
         ss >> i >> j >> w;
-        if(i==world_rank)map.data[j]=w;
-        else if(j==world_rank)map.data[i]=w;
+        if(i==world_rank)data[j]=w;
+        else if(j==world_rank)data[i]=w;
     }
 }
 
 inline void create_graph(){
-    MPI_Dist_graph_create(MPI_COMM_WORLD, 1, &world_rank, &map.nb,
-            map.neig.data(), MPI_UNWEIGHTED, MPI_INFO_NULL, false, &COMM_GRAPH);
+    MPI_Dist_graph_create(MPI_COMM_WORLD, 1, &world_rank, &neig_count,
+            neig.data(), MPI_UNWEIGHTED, MPI_INFO_NULL, false, &COMM_GRAPH);
     MPI_Comm_rank(COMM_GRAPH, &graph_rank);
 }
 
 inline void floyd(){
 
-    MPI_Request *send_req = new MPI_Request[map.nb];
-    int *buf = new int[map.vt];
+    MPI_Request *send_req = new MPI_Request[vert];
 
     int not_done = 1;
     while(not_done){
         not_done = 0;
-        for(int i=0;i<map.nb;++i){
-            MPI_Isend(map.data, map.vt, MPI_INT, map.neig[i], 1, COMM_GRAPH, &send_req[i]);
-
-            LOG("send to %d", map.neig[i]);
-
+        for(int i=0;i<neig_count;++i){
+            MPI_Isend(data, vert, MPI_INT, neig[i], 1, COMM_GRAPH, send_req+i);
+            LOG("send to %d", neig[i]);
         }
-        for(int i=0;i<map.nb;++i){
+        for(int i=0;i<neig_count;++i){
             TIC;{
 
-            MPI_Recv(buf, map.vt, MPI_INT, map.neig[i], 1, COMM_GRAPH, MPI_STATUS_IGNORE);
+            MPI_Recv(buf, vert, MPI_INT, neig[i], 1, COMM_GRAPH, MPI_STATUS_IGNORE);
  
             }TOC_P(COMM);
             TIC;{
 
-            not_done |= map.update( map.neig[i], buf );
+            not_done |= update( neig[i] );
 
             }TOC_P(CALC);
         }
@@ -201,18 +185,17 @@ inline void floyd(){
     }
 
     delete [] send_req;
-    delete [] buf;
 }
 
 inline void dump_to_file(const char *file){
     std::stringstream ss;
-    for(int i=0;i<map.vt;++i){
-        ss << map.data[i] << ' ';
-    }
+    
+    std::ostream_iterator<int> out(ss, " ");
+    std::copy(data, data+vert, out);
     ss << '\n';
 
     std::string str = ss.str();
-    int *len = new int[map.vt]();
+    int *len = new int[vert]();
     len[world_rank] = str.size();
     
     MPI_File fout;
@@ -221,7 +204,7 @@ inline void dump_to_file(const char *file){
 
 
     TIC;{
-    MPI_Allreduce(MPI_IN_PLACE, len, map.vt, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+    MPI_Allreduce(MPI_IN_PLACE, len, vert, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
     }TOC_P(COMM);
 
     int offset=0;
@@ -255,7 +238,7 @@ int main(int argc, char **argv){
 
     LOG("file read");
 
-    map.calc();
+    calc();
 
     create_graph();
 
@@ -271,6 +254,7 @@ int main(int argc, char **argv){
     printf("%d, %lf, %lf, %lf, %lf, %lf\n", world_rank, EXE, CALC, IO, COMM, EXE-CALC-IO-COMM);
 #endif
 
+    finalize();
     MPI_Finalize();
     return 0;
 }
