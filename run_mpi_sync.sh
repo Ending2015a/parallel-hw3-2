@@ -25,7 +25,7 @@ for ((n=0;n<${#testcase[@]};++n)); do
             rm ${oup}
         fi
         echo "srun --overcommit $p -N ${pc[$i]} -n ${c[$i]} ./${program} $inp $oup ${c[$i]}" |& tee -a $log
-        { time srun --overcommit $p -N ${pc[$i]} -n ${c[$i]} ./${program} $inp $oup ${c[$i]} |& tee -a $log ; } |& tee -a $log
+        time srun --overcommit $p -N ${pc[$i]} -n ${c[$i]} ./${program} $inp $oup ${c[$i]} | tee -a $log
 
         diff $oup $ans
         if [ $? == 0 ] ; then

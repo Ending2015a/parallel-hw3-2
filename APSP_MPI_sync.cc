@@ -32,6 +32,7 @@
     double total_calctime=0;
     double total_iotime=0;
     double total_commtime=0;
+    double total_waittime=0;
     double exe_st=0;
     double exe_ed=0;
     #define ST exe_st
@@ -40,6 +41,7 @@
     #define CALC total_calctime
     #define IO total_calctime
     #define COMM total_commtime
+    #define WAIT total_waittime
 
 #else
     #define TIC
@@ -53,6 +55,7 @@
     #define CALC
     #define IO
     #define COMM
+    #define WAIT
 #endif
 
 
@@ -181,7 +184,7 @@ inline void floyd(){
         }
         TIC;{
         MPI_Allreduce(MPI_IN_PLACE, &not_done, 1, MPI_INT, MPI_LOR, MPI_COMM_WORLD);
-        }TOC_P(COMM);
+        }TOC_P(WAIT);
     }
 
     delete [] send_req;
@@ -250,8 +253,8 @@ int main(int argc, char **argv){
 #ifdef _MEASURE_TIME
     TIME(ED);
     EXE = ED - ST;
-    //rank, EXE, CALC, IO, COMM, PROC
-    printf("%d, %lf, %lf, %lf, %lf, %lf\n", world_rank, EXE, CALC, IO, COMM, EXE-CALC-IO-COMM);
+    //rank, EXE, CALC, WAIT, IO, COMM, PROC
+    printf("%d, %lf, %lf, %lf, %lf, %lf, %lf\n", world_rank, EXE, CALC, WAIT, IO, COMM, EXE-CALC-WAIT-IO-COMM);
 #endif
 
     finalize();

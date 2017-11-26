@@ -31,13 +31,16 @@
     struct timespec __temp_time;
     struct timespec __temp_time2;
     #define __CTIME(X) clock_gettime(CLOCK_MONOTONIC, &X)
+    #define __CALC_TIME(X, Y) ((Y.tv_sec -X.tv_sec)+(Y.tv_nsec-X.tv_nsec)/B)
     #define TIC     __CTIME(__temp_time)
     #define TOC(X)  __CTIME(__temp_time2); X = ((__temp_time2.tv_sec -__temp_time.tv_sec)+(__temp_time2.tv_nsec-__temp_time.tv_nsec)/B)
     #define TOC_P(X) __CTIME(__temp_time2); X += ((__temp_time2.tv_sec -__temp_time.tv_sec)+(__temp_time2.tv_nsec-__temp_time.tv_nsec)/B)
     #define TIME(X) __CTIME(__temp_time2); X = (__temp_time2.tv_sec+__temp_time2.tv_nsec/B)
 
-    double *total_calctime_st;
-    double *total_calctime_ed;
+    struct timespec *__temp_times;
+    struct timespec *__temp_times2;
+    double *total_calctime;
+    double *total_waittime;
     double total_iotime=0;
     double total_commtime=0;
     double total_exetime=0;
@@ -45,12 +48,14 @@
     double exe_ed=0;
     #define ST exe_st
     #define ED exe_ed
-    #define CALC_ST total_calctime_st[id]
-    #define CALC_ED total_calctime_ed[id]
+    #define CALC total_calctime[id]
+    #define WAIT total_waittime[id]
     #define IO total_iotime
     #define COMM total_commtime
     #define EXE total_exetime
 #else
+    #define __CTIME(X)
+    #define __CALC_TIME(X, Y)
     #define TIC
     #define TOC(X)
     #define TOC_P(X)
@@ -58,8 +63,8 @@
 
     #define ST
     #define ED
-    #define CALC_ST
-    #define CALC_ED
+    #define CALC
+    #define WAIT
     #define IO
     #define COMM
     #define EXE
@@ -182,17 +187,32 @@ void *task(void* var){
     int ed = st + sz;
     */
 
-    TIME(CALC_ST);
+
     for(int k=0;k<vert;++k){
+
+#ifdef _MEASURE_TIME
+        __CTIME(__temp_times[id]);
+#endif
+
         for(int i=id;i<vert;i+=valid_size){
             for(int j=0;j<vert;++j){
                 map[i][j] = MIN(map[i][k]+map[k][j], map[i][j]);
             }
         }
-        pthread_barrier_wait(&barr);
-    }
 
-    TIME(CALC_ED);
+#ifdef _MEASURE_TIME
+        __CTIME(__temp_times2[id]);
+        total_calctime[id] += __CALC_TIME(__temp_times[id], __temp_times2[id]);
+#endif
+
+        pthread_barrier_wait(&barr);
+
+#ifdef _MEASURE_TIME
+        __CTIME(__temp_times[id]);
+        total_waittime[id] += __CALC_TIME(__temp_times2[id], __temp_times[id]);
+#endif
+
+    }
     
 #ifdef parallel_output
     parallel_dump_to_file(id);
@@ -218,8 +238,10 @@ int main(int argc, char **argv){
     ID = new int[valid_size];
 
 #ifdef _MEASURE_TIME
-    total_calctime_st = new double[valid_size]{};
-    total_calctime_ed = new double[valid_size]{};
+    total_calctime = new double[valid_size]{};
+    total_waittime = new double[valid_size]{};
+    __temp_times = new struct timespec[valid_size]{};
+    __temp_times2 = new struct timespec[valid_size]{};
 #endif
 
     pthread_barrier_init(&barr, NULL, valid_size);
@@ -261,12 +283,26 @@ int main(int argc, char **argv){
 #ifdef _MEASURE_TIME   
     EXE = ED - ST;
     //ID, EXE, calc, io, others
-    printf("%lf, %lf, %lf, %lf, \n", EXE, total_calctime_ed[0]-total_calctime_st[0], 
-                            IO, (EXE-(total_calctime_ed[0]-total_calctime_st[0])-IO));
+
+    double avg_calctime = 0;
+    double avg_waittime = 0;
+    
+    for(int i=0;i<valid_size;++i){
+        avg_calctime += total_calctime[i];
+        avg_waittime += total_waittime[i];     
+    }
+
+    avg_calctime /= valid_size;
+    avg_waittime /= valid_size;
+    
+    //EXE, calc, wait, io, others
+    printf("%lf, %lf, %lf, %lf, \n", EXE, avg_calctime, avg_waittime, IO, (EXE-avg_calctime-avg_waittime-IO));
 
 
-    delete [] total_calctime_st;
-    delete [] total_calctime_ed;
+    delete [] total_calctime;
+    delete [] total_waittime;
+    delete [] __temp_times;
+    delete [] __temp_times2;
 #endif
 
     return 0;
