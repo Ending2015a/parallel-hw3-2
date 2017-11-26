@@ -4,9 +4,9 @@ program="APSP_MPI_sync"
 p='-p batch'
 pc=('1' '2' '3' '4')
 c=('200' '200' '200' '200')
-testcase=("v200_e200" "v200_e1k" "v200_e10k" "v200_e20k")
+testcase=("v200_e20k")
 root="testcase/"
-log="mpi_sync_time_measure.log"
+log="mpi_sync_time_measure_with_graph.log"
 
 
 if [ -f "$log" ] ; then

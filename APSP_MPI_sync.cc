@@ -33,6 +33,11 @@
     double total_iotime=0;
     double total_commtime=0;
     double total_waittime=0;
+    double total_block1=0;
+    double total_block2=0;
+    double total_block3=0;
+    double total_block4=0;
+    double total_block5=0;
     double exe_st=0;
     double exe_ed=0;
     #define ST exe_st
@@ -42,6 +47,11 @@
     #define IO total_calctime
     #define COMM total_commtime
     #define WAIT total_waittime
+    #define B1 total_block1
+    #define B2 total_block2
+    #define B3 total_block3
+    #define B4 total_block4
+    #define B5 total_block5
 
 #else
     #define TIC
@@ -56,6 +66,11 @@
     #define IO
     #define COMM
     #define WAIT
+    #define B1
+    #define B2
+    #define B3
+    #define B4
+    #define B5
 #endif
 
 
@@ -157,6 +172,8 @@ inline void create_graph(){
     MPI_Dist_graph_create(MPI_COMM_WORLD, 1, &world_rank, &neig_count,
             neig.data(), MPI_UNWEIGHTED, MPI_INFO_NULL, false, &COMM_GRAPH);
     MPI_Comm_rank(COMM_GRAPH, &graph_rank);
+    //COMM_GRAPH = MPI_COMM_WORLD;
+    //graph_rank = world_rank;
 }
 
 inline void floyd(){
@@ -193,6 +210,7 @@ inline void floyd(){
 inline void dump_to_file(const char *file){
     std::stringstream ss;
     
+    TIC;
     std::ostream_iterator<int> out(ss, " ");
     std::copy(data, data+vert, out);
     ss << '\n';
@@ -205,6 +223,7 @@ inline void dump_to_file(const char *file){
     MPI_File_delete(file, MPI_INFO_NULL);
     MPI_File_open(MPI_COMM_WORLD, file, MPI_MODE_WRONLY | MPI_MODE_CREATE, MPI_INFO_NULL, &fout);
 
+    TOC_P(IO);
 
     TIC;{
     MPI_Allreduce(MPI_IN_PLACE, len, vert, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
@@ -237,24 +256,33 @@ int main(int argc, char **argv){
 
     
     TIME(ST);
+    TIC;
     dump_from_file(argv[1]);
+    TOC_P(B1);
 
     LOG("file read");
 
+    TIC;
     calc();
+    TOC_P(B2);
 
+    TIC;
     create_graph();
+    TOC_P(B3);
 
+    TIC;
     floyd();
-    
-    dump_to_file(argv[2]);
+    TOC_P(B4);    
 
+    TIC;
+    dump_to_file(argv[2]);
+    TOC_P(B5);
 
 #ifdef _MEASURE_TIME
     TIME(ED);
     EXE = ED - ST;
     //rank, EXE, CALC, WAIT, IO, COMM, PROC
-    printf("%d, %lf, %lf, %lf, %lf, %lf, %lf\n", world_rank, EXE, CALC, WAIT, IO, COMM, EXE-CALC-WAIT-IO-COMM);
+    printf("%d, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf\n", world_rank, EXE, CALC, WAIT, IO, COMM, EXE-CALC-WAIT-IO-COMM, B1, B2, B3, B4, B5);
 #endif
 
     finalize();
