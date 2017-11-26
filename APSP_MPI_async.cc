@@ -17,7 +17,7 @@
 #define INF 99999999
 
 //#define _DEBUG_
-#define _MEASURE_TIME
+//#define _MEASURE_TIME
 
 
 #ifdef _MEASURE_TIME

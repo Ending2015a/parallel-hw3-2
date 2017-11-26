@@ -221,13 +221,13 @@ inline void dump_to_file(const char *file){
 
 
 inline void create_graph(){
-    TIC;
-    MPI_Dist_graph_create(MPI_COMM_WORLD, 1, &world_rank, &neighbor_count, 
-            neighbor_list.data(), MPI_UNWEIGHTED, MPI_INFO_NULL, false, &COMM_GRAPH);
-    MPI_Comm_rank(COMM_GRAPH, &graph_rank);
-    //COMM_GRAPH = MPI_COMM_WORLD;
-    //graph_rank = world_rank;
-    TOC_P(COMM);
+    //TIC;
+   // MPI_Dist_graph_create(MPI_COMM_WORLD, 1, &world_rank, &neighbor_count, 
+    //        neighbor_list.data(), MPI_UNWEIGHTED, MPI_INFO_NULL, false, &COMM_GRAPH);
+    //MPI_Comm_rank(COMM_GRAPH, &graph_rank);
+    COMM_GRAPH = MPI_COMM_WORLD;
+    graph_rank = world_rank;
+    //TOC_P(COMM);
 }
 
 inline int check_all_no_update(){
