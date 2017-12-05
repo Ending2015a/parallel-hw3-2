@@ -4,7 +4,7 @@ program="APSP_seq"
 p='-p batch'
 pc=('1')
 c=('1')
-testcase=("v2k_e2k" "v2k_e200k" "v2k_e1m" "v2k_e2m")
+testcase=("case00" "case01" "case02" "case03" "case04" "case05" "case06")
 log="seq_time_measure.log"
 
 

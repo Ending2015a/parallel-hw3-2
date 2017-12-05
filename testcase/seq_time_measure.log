@@ -104,3 +104,38 @@ srun -p batch -N 1 -n 1 ./APSP_seq v2k_e2m.in v2k_e2m.out 1
 real	0m15.730s
 user	0m0.006s
 sys	0m0.010s
+srun -p batch -N 1 -n 1 ./APSP_seq case00.in case00.out 1
+
+real	0m15.393s
+user	0m0.007s
+sys	0m0.008s
+srun -p batch -N 1 -n 1 ./APSP_seq case01.in case01.out 1
+
+real	0m15.333s
+user	0m0.003s
+sys	0m0.012s
+srun -p batch -N 1 -n 1 ./APSP_seq case02.in case02.out 1
+
+real	0m15.575s
+user	0m0.008s
+sys	0m0.006s
+srun -p batch -N 1 -n 1 ./APSP_seq case03.in case03.out 1
+
+real	0m15.517s
+user	0m0.006s
+sys	0m0.011s
+srun -p batch -N 1 -n 1 ./APSP_seq case04.in case04.out 1
+
+real	0m15.806s
+user	0m0.004s
+sys	0m0.010s
+srun -p batch -N 1 -n 1 ./APSP_seq case05.in case05.out 1
+
+real	0m15.371s
+user	0m0.008s
+sys	0m0.009s
+srun -p batch -N 1 -n 1 ./APSP_seq case06.in case06.out 1
+
+real	0m15.225s
+user	0m0.011s
+sys	0m0.005s
